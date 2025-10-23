@@ -12,21 +12,48 @@ import {
 } from "@mui/material";
 import AutoAwesomeRoundedIcon from "@mui/icons-material/AutoAwesomeRounded";
 import GitHubIcon from "@mui/icons-material/GitHub";
+import { useEffect } from "react";
 
 function App() {
   const handlesubmit = () => {
     console.log("button clicked");
   };
 
+  useEffect(() => {
+    const handleMouseMove = (e) => {
+      const x = (e.clientX / window.innerWidth) * 100;
+      const y = (e.clientY / window.innerHeight) * 100;
+      document.documentElement.style.setProperty("--mouse-x", `${x}%`);
+      document.documentElement.style.setProperty("--mouse-y", `${y}%`);
+    };
+    
+    document.addEventListener("mousemove", handleMouseMove);
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.removeEventListener("mousemove", handleMouseMove);
+      document.body.style.overflow = "auto";
+    };
+    
+  }, []);
+
   return (
     <Box
       sx={{
         minHeight: "100vh",
-        background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+        background: `
+          radial-gradient(
+            600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+            rgba(255, 255, 255, 0.15),
+            transparent 40%
+          ),
+          linear-gradient(135deg, #667eea 0%, #764ba2 100%)
+        `,
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
         padding: 2,
+        position: "relative",
+        overflow: "hidden",
       }}
     >
       <Container maxWidth="sm">
@@ -46,11 +73,11 @@ function App() {
                 alignItems: "center",
                 justifyContent: "center",
                 width: 80,
-                height: 80,
+                height: 60,
                 borderRadius: "50%",
                 background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
                 mb: 2,
-                boxShadow: "0 8px 24px rgba(102, 126, 234, 0.4)",
+                boxShadow: "0 8px 14px rgba(102, 126, 234, 0.4)",
               }}
             >
               <AutoAwesomeRoundedIcon sx={{ fontSize: 40, color: "white" }} />
@@ -65,6 +92,7 @@ function App() {
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
                 mb: 1,
+                fontFamily: "'Roboto', sans-serif",
               }}
             >
               AI-Powered README Generator
@@ -72,7 +100,7 @@ function App() {
             <Typography
               variant="body1"
               color="text.secondary"
-              sx={{ fontSize: "1.05rem" }}
+              sx={{ fontSize: "1.05rem", fontWeight: 400, fontFamily: "'Roboto', sans-serif" }}
             >
               Transform your repository into professional documentation
               instantly
@@ -140,6 +168,46 @@ function App() {
           </Typography>
         </Paper>
       </Container>
+
+      {/* Developer Footer */}
+      <Box
+        sx={{
+          position: "fixed",
+          bottom: 20,
+          left: 0,
+          right: 0,
+          textAlign: "center",
+          color: "rgba(56, 47, 47, 0.9)",
+          fontSize: "12px",
+          fontWeight: 400,
+          textShadow: "0 2px 10px rgba(0, 0, 0, 0.3)",
+          zIndex: 10,
+        }}
+      >
+        Developed by{" "}
+        <Box
+          component="span"
+          sx={{
+            color: "#ff4757",
+            display: "inline-block",
+            animation: "heartbeat 1.5s ease-in-out infinite",
+            "@keyframes heartbeat": {
+              "0%, 100%": {
+                transform: "scale(1)",
+              },
+              "10%, 30%": {
+                transform: "scale(1.1)",
+              },
+              "20%, 40%": {
+                transform: "scale(1)",
+              },
+            },
+          }}
+        >
+          ❤️
+        </Box>{" "}
+        Disitha Ranasinghe
+      </Box>
     </Box>
   );
 }
