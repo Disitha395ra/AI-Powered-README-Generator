@@ -273,52 +273,7 @@ function App() {
               <Fade in>
                 <Box sx={{ textAlign: "center", py: 2 }}>
                   {/* Circular Progress Indicator */}
-                  <Box
-                    sx={{
-                      position: "relative",
-                      display: "inline-flex",
-                      mb: 3,
-                    }}
-                  >
-                    <CircularProgress
-                      variant="determinate"
-                      value={progress}
-                      size={120}
-                      thickness={4}
-                      sx={{
-                        color: "#667eea",
-                        "& .MuiCircularProgress-circle": {
-                          strokeLinecap: "round",
-                        },
-                      }}
-                    />
-                    <Box
-                      sx={{
-                        top: 0,
-                        left: 0,
-                        bottom: 0,
-                        right: 0,
-                        position: "absolute",
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                      }}
-                    >
-                      <Typography
-                        variant="h5"
-                        component="div"
-                        sx={{
-                          fontWeight: 700,
-                          background:
-                            "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
-                          WebkitBackgroundClip: "text",
-                          WebkitTextFillColor: "transparent",
-                        }}
-                      >
-                        {`${Math.round(progress)}%`}
-                      </Typography>
-                    </Box>
-                  </Box>
+                  
 
                   {/* Linear Progress Bar */}
                   <Box sx={{ width: "100%", mb: 2 }}>
