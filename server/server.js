@@ -11,9 +11,9 @@ app.use(express.json());
 app.use(cors());
 
 
-const openai = new openAI.OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-});
+//const openai = new openAI.OpenAI({
+  //apiKey: process.env.OPENAI_API_KEY,
+//});
 
 app.post('/generate', async (req, res) => {
   const { repoUrl } = req.body;
