@@ -3,6 +3,7 @@ import axios from 'axios';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import openAI from 'openai';
+import { GoogleGenerativeAI } from "@google/generative-ai";
 
 dotenv.config();
 
@@ -11,9 +12,7 @@ app.use(express.json());
 app.use(cors());
 
 
-const openai = new openAI.OpenAI({
-    apiKey: process.env.OPENAI_API_KEY,
-});
+const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 
 app.post('/generate', async (req, res) => {
   const { repoUrl } = req.body;
@@ -48,12 +47,9 @@ app.post('/generate', async (req, res) => {
         `;
 
       // Call OpenAI API
-      const completion = await openai.chat.completions.create({
-        model: "gpt-4o-mini",
-        messages: [{ role: "user", content: prompt }],
-      });
-
-      const readme = completion.choices[0].message.content;
+      const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+      const result = await model.generateContent(prompt);
+      const readme = result.response.text();
       res.json({ readme });
     }catch(error){
         console.error('Error generating README:', error);
