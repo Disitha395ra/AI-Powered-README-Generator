@@ -13,10 +13,12 @@ import {
 import AutoAwesomeRoundedIcon from "@mui/icons-material/AutoAwesomeRounded";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import { useEffect } from "react";
+import { useState } from "react";
 
 function App() {
+  const [repoUrl, setrepoUrl] = useState("")
   const handlesubmit = () => {
-    console.log("button clicked");
+    if(!repoUrl.trim()) return;
   };
 
   useEffect(() => {
@@ -113,6 +115,8 @@ function App() {
               variant="outlined"
               label="GitHub Repository URL"
               type="text"
+              value={repoUrl}
+              onChange={(e) => setrepoUrl(e.target.value)}
               placeholder="https://github.com/username/repository"
               InputProps={{
                 startAdornment: (
