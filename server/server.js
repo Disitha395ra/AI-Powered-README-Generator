@@ -85,3 +85,5 @@ Include:
 app.listen(5000, () => {
   console.log("✅ Server is running on port 5000");
 });
+
+//gemini api key = GEMINI_API_KEY=AIzaSyBDuMBADQWXXJz5SDt5FuNPC8SOYe_w5aE
