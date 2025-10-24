@@ -1,11 +1,14 @@
 import express from 'express';
 import axios from 'axios';
 import cors from 'cors';
-import dotenv from 'dotenv';
-import openAI from 'openai';
+import dotenv from "dotenv";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
 dotenv.config();
+console.log(
+  "Gemini API Key loaded:",
+  process.env.GEMINI_API_KEY ? "✅ Yes" : "❌ No"
+);
 
 const app = express();
 app.use(express.json());
