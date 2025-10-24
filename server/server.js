@@ -18,7 +18,32 @@ app.use(cors());
 app.post('/generate', async (req, res) => {
   const { repoUrl } = req.body;
     try {
-        console.log('Received repository URL:', repoUrl);
+        const parts = repoUrl.split("github.com/")[1];
+        const [owner, repo] = parts.split("/");
+
+        //fetch repo details   
+        const { data } = await axios.get(`https://api.github.com/repos/${owner}/${repo}`);
+        const { name, description, language, topics, stargazers_count } = data;
+
+        //prompt for OpenAI
+        const prompt = `
+    Create a clean, professional README.md for this GitHub project:
+    - Name: ${name}
+    - Description: ${description}
+    - Language: ${language}
+    - Stars: ${stargazers_count}
+    - Topics: ${topics.join(", ")}
+
+    Include:
+    1. Title and badges (GitHub stars, forks, license)
+    2. Summary
+    3. Features
+    4. Tech Stack
+    5. Installation Steps
+    6. Usage Instructions
+    7. Contributing
+    8. License Section
+    `;
     }catch(error){
         console.error('Error generating README:', error);
         res.status(500).json({ error: 'Failed to generate README' });
