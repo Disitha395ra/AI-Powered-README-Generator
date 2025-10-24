@@ -50,7 +50,6 @@ function App() {
       setProgress(100);
 
       if (data.readme) {
-        // Small delay to show 100% completion
         setTimeout(() => {
           navigate("/output", { state: { readme: data.readme } });
         }, 500);
@@ -272,9 +271,6 @@ function App() {
             ) : (
               <Fade in>
                 <Box sx={{ textAlign: "center", py: 2 }}>
-                  {/* Circular Progress Indicator */}
-                  
-
                   {/* Linear Progress Bar */}
                   <Box sx={{ width: "100%", mb: 2 }}>
                     <LinearProgress
@@ -311,6 +307,18 @@ function App() {
                 </Box>
               </Fade>
             )}
+            <Box sx={{ mt: 3, textAlign: "center" }}>
+              <Typography
+                variant="body2"
+                color="text.secondary"
+                sx={{ mb: 0.5 }}
+              >
+                No login required, No subscription, Fastest service
+              </Typography>
+              <Typography variant="body2" color="text.secondary">
+                Developed by ❤️ Disitha Ranasinghe
+              </Typography>
+            </Box>
           </Paper>
         </Zoom>
       </Container>
