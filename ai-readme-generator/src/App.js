@@ -17,8 +17,28 @@ import { useState } from "react";
 
 function App() {
   const [repoUrl, setrepoUrl] = useState("")
-  const handlesubmit = () => {
+  const [loading, setLoading] = useState(false);
+  const handlesubmit = async () => {
     if(!repoUrl.trim()) return;
+    setLoading(true);
+
+    try{
+      const res = await fetch("http://localhost:5000/generate", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ repoUrl }),
+      });
+      const data = await res.json();
+      alert("README generated successfully! Check console for output.");
+      console.log(data.readme);
+    }catch(error){
+      alert("Error generating README. Please try again.");
+    }finally{
+      setLoading(false);
+    }
+    
   };
 
   useEffect(() => {
@@ -102,7 +122,11 @@ function App() {
             <Typography
               variant="body1"
               color="text.secondary"
-              sx={{ fontSize: "1.05rem", fontWeight: 400, fontFamily: "'Roboto', sans-serif" }}
+              sx={{
+                fontSize: "1.05rem",
+                fontWeight: 400,
+                fontFamily: "'Roboto', sans-serif",
+              }}
             >
               Transform your repository into professional documentation
               instantly
@@ -141,6 +165,7 @@ function App() {
             variant="contained"
             size="large"
             startIcon={<AutoAwesomeRoundedIcon />}
+            disabled={loading || repoUrl.trim() === ""}
             onClick={handlesubmit}
             sx={{
               py: 1.5,
