@@ -108,4 +108,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ---
 ## Images
+| Home Page | Loading Page | Result Page |
+|-----------|-------------|------------|
+| ![Home page](./images/first.png) | ![Loading page](./images/second.png) | ![Result page](./images/three.png) |
+
 
