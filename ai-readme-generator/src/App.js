@@ -40,7 +40,7 @@ function App() {
 
     try {
       const res = await fetch(
-        "https://ai-powered-readme-generator.vercel.app/generate",
+        "https://api.readmegenai.cloud/readmegenapi/v1/generate",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
