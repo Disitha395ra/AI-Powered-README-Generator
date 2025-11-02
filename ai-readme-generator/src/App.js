@@ -12,7 +12,6 @@ import {
   Fade,
   Zoom,
   LinearProgress,
-  CircularProgress,
 } from "@mui/material";
 import AutoAwesomeRoundedIcon from "@mui/icons-material/AutoAwesomeRounded";
 import GitHubIcon from "@mui/icons-material/GitHub";
@@ -30,7 +29,7 @@ function App() {
     setLoading(true);
     setProgress(0);
 
-    // Simulate progress for better UX
+    // Simulate progress bar for better UX
     const progressInterval = setInterval(() => {
       setProgress((prev) => {
         if (prev >= 90) return prev;
@@ -39,18 +38,23 @@ function App() {
     }, 500);
 
     try {
-        const res = await fetch("https://ai-powered-readme-generator.vercel.app/generate", {
+      const res = await fetch("https://ai-powered-readme-generator.vercel.app/api/generate", {
         method: "POST",
-        headers: { 
-          "Authorization": `Bearer ${token}`,
+        headers: {
           "Content-Type": "application/json"
         },
         body: JSON.stringify({ repoUrl })
       });
 
-
       clearInterval(progressInterval);
       setProgress(100);
+
+      if (!res.ok) {
+        throw new Error(`HTTP error! Status: ${res.status}`);
+      }
+
+      const data = await res.json();
+      console.log(data);
 
       if (data.readme) {
         setTimeout(() => {
@@ -61,7 +65,9 @@ function App() {
         setLoading(false);
         setProgress(0);
       }
+
     } catch (error) {
+      console.error("Error generating README:", error);
       clearInterval(progressInterval);
       alert("Error generating README. Please try again.");
       setLoading(false);
@@ -69,6 +75,7 @@ function App() {
     }
   };
 
+  // Mouse movement background animation
   useEffect(() => {
     const handleMouseMove = (e) => {
       const x = (e.clientX / window.innerWidth) * 100;
@@ -274,7 +281,6 @@ function App() {
             ) : (
               <Fade in>
                 <Box sx={{ textAlign: "center", py: 2 }}>
-                  {/* Linear Progress Bar */}
                   <Box sx={{ width: "100%", mb: 2 }}>
                     <LinearProgress
                       variant="determinate"
@@ -291,25 +297,20 @@ function App() {
                       }}
                     />
                   </Box>
-
-                  {/* Loading Messages */}
                   <Typography
                     variant="body2"
                     color="text.secondary"
                     sx={{ fontSize: "0.95rem", fontWeight: 500 }}
                   >
                     {progress < 30 && "🔍 Analyzing repository..."}
-                    {progress >= 30 &&
-                      progress < 60 &&
-                      "📝 Processing files..."}
-                    {progress >= 60 &&
-                      progress < 90 &&
-                      "✨ Generating README..."}
+                    {progress >= 30 && progress < 60 && "📝 Processing files..."}
+                    {progress >= 60 && progress < 90 && "✨ Generating README..."}
                     {progress >= 90 && "✅ Finalizing document..."}
                   </Typography>
                 </Box>
               </Fade>
             )}
+
             <Box sx={{ mt: 3, textAlign: "center" }}>
               <Typography
                 variant="body2"
