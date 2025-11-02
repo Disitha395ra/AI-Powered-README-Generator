@@ -39,7 +39,7 @@ function App() {
     }, 500);
 
     try {
-        const res = await fetch("https://ai-powered-readme-generator.vercel.app", {
+        const res = await fetch("https://ai-powered-readme-generator.vercel.app/generate", {
         method: "POST",
         headers: { 
           "Authorization": `Bearer ${token}`,
