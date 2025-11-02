@@ -21,7 +21,7 @@ const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY, {
 });
 
 // ✅ Define route for generating README
-app.post("/generate", async (req, res) => {
+app.post("/api/generate", async (req, res) => {
   const { repoUrl } = req.body;
 
   try {
