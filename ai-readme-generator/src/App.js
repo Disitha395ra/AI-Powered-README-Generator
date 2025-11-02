@@ -38,7 +38,7 @@ function App() {
     }, 500);
 
     try {
-      const res = await fetch("https://ai-powered-readme-generator.vercel.app/api/generate", {
+      const res = await fetch("https://ai-powered-readme-generator.vercel.app/generate", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
