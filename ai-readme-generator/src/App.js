@@ -39,15 +39,15 @@ function App() {
     }, 500);
 
     try {
-      const res = await fetch(
-        "https://api.readmegenai.cloud/readmegenapi/v1/generate",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ repoUrl }),
-        }
-      );
-      const data = await res.json();
+        const res = await fetch("https://api.readmegenai.cloud/readmegen/v1/generate", {
+        method: "POST",
+        headers: { 
+          "Authorization": `Bearer ${token}`,
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ repoUrl })
+      });
+
 
       clearInterval(progressInterval);
       setProgress(100);
