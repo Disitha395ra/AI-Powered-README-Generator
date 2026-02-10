@@ -112,4 +112,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 |-----------|-------------|------------|
 | ![Home page](./images/first.png) | ![Loading page](./images/second.png) | ![Result page](./images/three.png) |
 
-
+<p align="center">
+  <img src="ss1.jpeg" width="180" />
+</p>
