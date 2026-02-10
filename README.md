@@ -113,5 +113,5 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 | ![Home page](./images/first.png) | ![Loading page](./images/second.png) | ![Result page](./images/three.png) |
 
 <p align="center">
-  <img src="ss1.jpeg" width="180" />
+  <img src="Screenshot 2026-02-10 203159.png" width="180" />
 </p>
